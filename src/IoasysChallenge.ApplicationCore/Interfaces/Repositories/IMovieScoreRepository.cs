@@ -1,4 +1,5 @@
 ﻿using IoasysChallenge.ApplicationCore.Entity;
+using IoasysChallenge.ApplicationCore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -9,7 +10,9 @@ namespace IoasysChallenge.ApplicationCore.Interfaces.Repositories
 {
     public interface IMovieScoreRepository : IRepository<MovieScore>
     {
-        Task<MovieScore> UserMovieVote(Expression<Func<MovieScore, bool>> pridicate);
-        Task<double> GetMovieAvarageScore(Expression<Func<MovieScore, bool>> pridicate);
+        Task<MovieScore> UserMovieVote(MovieScore movieScore);
+        Task<double> GetMovieAvarageScore(int id);
+
+        Task<IEnumerable<MovieScore>> List(MovieListViewModel viewModel);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using IoasysChallenge.ApplicationCore.Entity;
+using IoasysChallenge.ApplicationCore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,8 @@ namespace IoasysChallenge.ApplicationCore.Interfaces.Services
         Task Update(MovieScore movieScore);
         Task<MovieScore> UserMovieVote(MovieScore movieScore);
         Task<double> GetMovieAvarageScore(int movieId);
+
+        Task<IEnumerable<MovieScore>> List(MovieListViewModel viewModel);
 
     }
 }

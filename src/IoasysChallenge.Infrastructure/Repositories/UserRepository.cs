@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using IoasysChallenge.Infrastructure.Query.Users;
 using IoasysChallenge.UI.Web.ViewModels;
+using IoasysChallenge.Infrastructure.Cryptography;
 
 namespace IoasysChallenge.Infrastructure.Repositories
 {
@@ -21,10 +22,12 @@ namespace IoasysChallenge.Infrastructure.Repositories
 
         }
 
-        public async Task<User> Authenticate(Expression<Func<User, bool>> predicate)
+        public async Task<User> Authenticate(User user)
         {
-            var a = predicate;
-            return await _repository.Users.Where(predicate).SingleOrDefaultAsync();
+
+            string passwordString = MD5Cryptography.Md5Hash(user.Password);
+
+            return await _repository.Users.Where(u => u.UserName.Equals(user.UserName) &&  u.Password.Equals(passwordString)).SingleOrDefaultAsync();
         }
 
         public async Task<int> CountUsers()
@@ -44,7 +47,17 @@ namespace IoasysChallenge.Infrastructure.Repositories
 
         public async Task<IEnumerable<User>> List(PaginationViewModel viewModel)
         {
-            return await _repository.Users.UsersActive().Skip(viewModel.Start).Take(viewModel.Limit).OrderBy(u => u.UserName).ToListAsync();
+            return await _repository.Users.UsersActive().OrderBy(u => u.UserName).Skip(viewModel.Start).Take(viewModel.Limit).ToListAsync();
+        }
+
+        public async override Task Add(User user)
+        {
+
+            user.Password =  MD5Cryptography.Md5Hash(user.Password);
+
+            await _repository.Users.AddAsync(user);
+            await _repository.SaveChangesAsync();
+
         }
     }
 }

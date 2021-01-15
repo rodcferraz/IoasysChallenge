@@ -1,5 +1,6 @@
 ﻿using IoasysChallenge.ApplicationCore.Entity;
 using IoasysChallenge.ApplicationCore.Interfaces.Repositories;
+using IoasysChallenge.ApplicationCore.ViewModels;
 using IoasysChallenge.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -19,9 +20,9 @@ namespace IoasysChallenge.Infrastructure.Repositories
 
         }
 
-        public async Task<MovieScore> UserMovieVote(Expression<Func<MovieScore, bool>> predicate)
+        public async Task<MovieScore> UserMovieVote(MovieScore movieScore)
         {
-            return await _repository.MovieScores.Where(predicate).SingleOrDefaultAsync();
+            return await _repository.MovieScores.Where(m => m.UserId == movieScore.UserId && m.MovieId == movieScore.MovieId).SingleOrDefaultAsync();
         }
 
         public async Task<int> CountMovies()
@@ -29,9 +30,19 @@ namespace IoasysChallenge.Infrastructure.Repositories
             return await FindAll().CountAsync();
         }
 
-        public async Task<double> GetMovieAvarageScore(Expression<Func<MovieScore, bool>> predicate)
+        public async Task<double> GetMovieAvarageScore(int id)
         {
-            return await _repository.MovieScores.Where(predicate).AverageAsync(a => a.Score);
+            if (await _repository.MovieScores.Where(m => m.MovieId == id).CountAsync() == 0)
+            {
+                return 0;
+            }
+
+            return await _repository.MovieScores.Where(m => m.MovieId == id).AverageAsync(a => a.Score);
+        }
+
+        public async Task<IEnumerable<MovieScore>> List(MovieListViewModel viewModel)
+        {
+            return await _repository.MovieScores.ToListAsync();
         }
     }
 }

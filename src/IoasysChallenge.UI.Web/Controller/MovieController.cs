@@ -39,9 +39,9 @@ namespace IoasysChallenge.UI.Web.Controller
             _mapper = mapper;
         }
 
-        [HttpPost]
+        [HttpPost("/Movie/Create")]
         [Authorize(Roles =("Administrator"))]
-        public async Task<ActionResult> Create([FromBody] MovieViewModel viewModel)
+        public async Task<ActionResult> Create([FromBody] CreateMovieViewModel viewModel)
         {
             if (!ModelState.IsValid)
             {
@@ -60,7 +60,7 @@ namespace IoasysChallenge.UI.Web.Controller
             }
         }
 
-        [HttpGet]
+        [HttpGet("/Movie/List")]
         [Authorize]
         public async Task<ActionResult> List(MovieListViewModel viewModel)
         {
@@ -87,7 +87,7 @@ namespace IoasysChallenge.UI.Web.Controller
 
         }
 
-        [HttpGet]
+        [HttpGet("/Movie/Details/{id?}")]
         [Authorize]
         public async Task<ActionResult> Details (int id)
         {

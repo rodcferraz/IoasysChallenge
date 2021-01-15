@@ -12,6 +12,7 @@ namespace IoasysChallenge.ApplicationCore.Interfaces.Repositories
         Task Add(TEntity entity);
         Task Update(TEntity entity);
         Task Delete(TEntity entity);
+        Task Save();
         //Task<Tentity> GetById(int id);
         IQueryable<TEntity> FindAll();
         Task<TEntity> GetByName(Expression<Func<TEntity, bool>> predicate);

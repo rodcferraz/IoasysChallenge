@@ -10,8 +10,9 @@ namespace IoasysChallenge.ApplicationCore.Interfaces.Repositories
 {
     public interface IUserRepository : IRepository<User>
     {
+        new Task Add(User user);
         Task<User> GetByName(Expression<Func<User, bool>> predicate);
-        Task<User> Authenticate(Expression<Func<User, bool>> predicate);
+        Task<User> Authenticate(User user);
         Task<IEnumerable<User>> List(PaginationViewModel viewModel);
         Task<IEnumerable<User>> GetAllUsers();
         Task<int> CountUsers();

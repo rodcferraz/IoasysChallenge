@@ -13,7 +13,7 @@ namespace IoasysChallenge.UI.Web.ViewModels.Users
 
         [Required(ErrorMessage ="{0} is required.")]
         [MaxLength(50, ErrorMessage ="Maximum {0} characters")]
-        [MinLength(5, ErrorMessage ="Minimum {0} characters")]
+        [MinLength(1, ErrorMessage ="Minimum {0} characters")]
         public string UserName { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
@@ -22,8 +22,6 @@ namespace IoasysChallenge.UI.Web.ViewModels.Users
         public string Password { get; set; }
 
         [Required(ErrorMessage = "{0} is required.")]
-        [MaxLength(20, ErrorMessage = "Maximum {0} characters")]
-        [MinLength(8, ErrorMessage = "Minimum {0} characters")]
         public string Role { get; set; }
 
         public bool IsDeleted { get; set; }

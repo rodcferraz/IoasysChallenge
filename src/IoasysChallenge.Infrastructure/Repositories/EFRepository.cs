@@ -19,7 +19,7 @@ namespace IoasysChallenge.Infrastructure.Repositories
             _repository = repository;
             _dbSet = _repository.Set<TEntity>();
         }
-        public async Task Add(TEntity entity)
+        public async virtual Task Add(TEntity entity)
         {
             await _repository.Set<TEntity>().AddAsync(entity);
             await _repository.SaveChangesAsync();
@@ -45,6 +45,11 @@ namespace IoasysChallenge.Infrastructure.Repositories
         public async Task<TEntity> GetByName(Expression<Func<TEntity, bool>> predicate)
         {
             return await _dbSet.Where(predicate).SingleOrDefaultAsync();
+        }
+
+        public async Task Save()
+        {
+            await _repository.SaveChangesAsync();
         }
     }
 }

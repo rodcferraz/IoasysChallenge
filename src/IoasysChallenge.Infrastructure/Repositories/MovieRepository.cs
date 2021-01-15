@@ -26,14 +26,13 @@ namespace IoasysChallenge.Infrastructure.Repositories
             return await FindAll().CountAsync();
         }
 
-        public async Task<Movie> GetById(Expression<Func<Movie, bool>> predicate)
+        public async Task<Movie> GetById(int id)
         {
-            return await _repository.Movies.Where(predicate).SingleOrDefaultAsync();
+            return await _repository.Movies.Where(m => m.MovieId == id).SingleOrDefaultAsync();
         }
 
         public IEnumerable<Movie> List(MovieListViewModel viewModel)
         {
-            string vb= "";
 
             return (IEnumerable<Movie>)_repository.Movies
                             .Include(m => m.MoviesScores)

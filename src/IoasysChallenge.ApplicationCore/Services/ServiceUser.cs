@@ -45,18 +45,13 @@ namespace IoasysChallenge.ApplicationCore.Services
 
         public async Task<User> Authenticate(User user)
         {
-            return await _userRepository.GetByName(u => u.UserName.Equals("Rodrigo") && u.Password.Equals("12345"));
+            return await _userRepository.Authenticate(user);
         }
 
         public async Task<IEnumerable<User>> List(PaginationViewModel viewModel)
         {
             return await _userRepository.List(viewModel);
         }
-
-        //public async Task<IEnumerable<User>> FindAll()
-        //{
-        //    return await _userRepository.FindAll();
-        //}
 
         public async Task<int> CountUsers()
         {

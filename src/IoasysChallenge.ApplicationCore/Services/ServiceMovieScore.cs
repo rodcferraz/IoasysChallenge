@@ -1,6 +1,7 @@
 ﻿using IoasysChallenge.ApplicationCore.Entity;
 using IoasysChallenge.ApplicationCore.Interfaces.Repositories;
 using IoasysChallenge.ApplicationCore.Interfaces.Services;
+using IoasysChallenge.ApplicationCore.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -22,9 +23,14 @@ namespace IoasysChallenge.ApplicationCore.Services
             await _movieScoreRepository.Add(movieScore);
         }
 
-        public async Task<double> GetMovieAvarageScore(int movieId)
+        public async Task<double> GetMovieAvarageScore(int id)
         {
-            return await _movieScoreRepository.GetMovieAvarageScore(m => m.MovieId == movieId);
+            return await _movieScoreRepository.GetMovieAvarageScore(id);
+        }
+
+        public async Task<IEnumerable<MovieScore>> List(MovieListViewModel viewModel)
+        {
+            return await _movieScoreRepository.List(viewModel);
         }
 
         public async Task Update(MovieScore movieScore)
@@ -34,7 +40,7 @@ namespace IoasysChallenge.ApplicationCore.Services
 
         public async Task<MovieScore> UserMovieVote(MovieScore movieScore)
         {
-            return await _movieScoreRepository.UserMovieVote(m => m.UserId == movieScore.UserId && m.MovieId == movieScore.MovieId);
+            return await _movieScoreRepository.UserMovieVote(movieScore);
         }
     }
 }

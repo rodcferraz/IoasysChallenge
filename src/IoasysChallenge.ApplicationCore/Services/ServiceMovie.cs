@@ -27,9 +27,9 @@ namespace IoasysChallenge.ApplicationCore.Services
             return await _movieRepository.CountMovies();
         }
 
-        public async Task<Movie> GetById(int movieId)
+        public async Task<Movie> GetById(int id)
         {
-            return await _movieRepository.GetById(m => m.MovieId == movieId);
+            return await _movieRepository.GetById(id);
         }
 
         public async Task<Movie> GetByName(string movieTitle)
@@ -39,7 +39,6 @@ namespace IoasysChallenge.ApplicationCore.Services
 
         public  IEnumerable<Movie> List(MovieListViewModel viewModel)
         {
-            var a = "";
             return _movieRepository.List(viewModel);
         }
     }

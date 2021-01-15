@@ -15,7 +15,7 @@ namespace IoasysChallenge.Infrastructure.Mappers
             builder.HasKey(u => u.UserId);
 
             builder.Property(u => u.UserName).HasMaxLength(50).IsRequired();
-            builder.Property(u => u.Password).HasMaxLength(20).IsRequired();
+            builder.Property(u => u.Password).HasMaxLength(200).IsRequired();
             builder.Property(u => u.Role).IsRequired();
             builder.Property(m => m.IsDeleted);
 

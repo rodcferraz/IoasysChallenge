@@ -104,7 +104,7 @@ namespace IoasysChallenge.UI.Web.Controller
             }
         }
 
-        [HttpDelete("/User/Delete")]
+        [HttpDelete("/User/Delete/{id?}")]
         [Authorize]
         public async Task<ActionResult> Delete(int id)
         {
@@ -147,7 +147,7 @@ namespace IoasysChallenge.UI.Web.Controller
             }
         }
 
-        [HttpPost("/Users/Vote")]
+        [HttpPost("/User/Vote")]
         [Authorize]
         public async Task<ActionResult> Vote([FromBody] MovieScoreViewModel viewModel)
         {
@@ -158,9 +158,8 @@ namespace IoasysChallenge.UI.Web.Controller
             try
             {
                 var movieScore = _mapper.Map<MovieScore>(viewModel);
-                var userMovieVote = await _serviceMovieScore.UserMovieVote(movieScore);
 
-                await _serviceMovieScore.Add(userMovieVote);
+                await _serviceMovieScore.Add(movieScore);
 
                 return Ok("User voted successfully");
             }

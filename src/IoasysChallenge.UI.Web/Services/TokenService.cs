@@ -10,14 +10,16 @@ using Microsoft.Extensions.Configuration;
 
 namespace IoasysChallenge.UI.Web.Services
 {
-    public static  class TokenService
+    public static class TokenService
     {
         public static IConfiguration Configuration { get; set; }
+
+        public static string Token = "ba29e0c3ed8be529ac37cc7da1f52cb4c3825bb88110d00fd891d947f8426c77";
 
         public static string GenerateToken(User user)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.ASCII.GetBytes("ba29e0c3ed8be529ac37cc7da1f52cb4c3825bb88110d00fd891d947f8426c77");
+            var key = Encoding.ASCII.GetBytes(Token);
 
             var tokenDescriptor = new SecurityTokenDescriptor()
             {

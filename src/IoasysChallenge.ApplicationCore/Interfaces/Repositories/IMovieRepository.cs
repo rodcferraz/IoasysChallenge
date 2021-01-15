@@ -12,6 +12,6 @@ namespace IoasysChallenge.ApplicationCore.Interfaces.Repositories
     {
         Task<int> CountMovies();
         IEnumerable<Movie> List(MovieListViewModel viewModel);
-        Task<Movie> GetById(Expression<Func<Movie, bool>> predicate);
+        Task<Movie> GetById(int id);
     }
 }
