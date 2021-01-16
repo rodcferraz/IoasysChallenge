@@ -13,6 +13,6 @@ namespace IoasysChallenge.ApplicationCore.Interfaces.Services
         Task<Movie> GetByName(string movieTitle);
         Task<Movie> GetById(int movieId);
         Task<int> CountMovies();
-        IEnumerable<Movie> List(MovieListViewModel viewModel);
+        Task<IEnumerable<Movie>> List(MovieListViewModel viewModel);
     }
 }

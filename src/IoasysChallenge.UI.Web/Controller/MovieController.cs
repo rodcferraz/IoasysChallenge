@@ -72,7 +72,7 @@ namespace IoasysChallenge.UI.Web.Controller
             try
             {
                 viewModel.Pagination.TotalRegistered = await _serviceMovie.CountMovies();
-                var movies =  _serviceMovie.List(viewModel);
+                var movies =  await _serviceMovie.List(viewModel);
 
                 Response.HttpContext.Items.ToList();
 

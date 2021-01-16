@@ -23,7 +23,7 @@ namespace IoasysChallenge.Infrastructure.Repositories
 
         public async Task<int> CountMovies()
         {
-            return await FindAll().CountAsync();
+            return await _repository.Movies.CountAsync();
         }
 
         public async Task<Movie> GetById(int id)
@@ -31,23 +31,20 @@ namespace IoasysChallenge.Infrastructure.Repositories
             return await _repository.Movies.Where(m => m.MovieId == id).SingleOrDefaultAsync();
         }
 
-        public IEnumerable<Movie> List(MovieListViewModel viewModel)
+        public async Task<IEnumerable<Movie>> List(MovieListViewModel viewModel)
         {
 
-            return (IEnumerable<Movie>)_repository.Movies
+            return await _repository.Movies
                             .Include(m => m.MoviesScores)
                             .WithDirector(viewModel.Director)
                             .WithActors(viewModel.Actors)
                             .WithGenre(viewModel.Genre)
                             .WithTitle(viewModel.Title)
-                            .GroupBy(m => m.MovieId)
-                            //.OrderByDescending(m => m)
+                            .OrderBy(m => m.Title)
                             .Skip(viewModel.Pagination.Start)
                             .Take(viewModel.Pagination.Limit)
-                            .ToList();
-                            
+                            .ToListAsync();
 
-                            //.ToListAsync();
         }
     }
 }

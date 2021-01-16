@@ -37,9 +37,9 @@ namespace IoasysChallenge.ApplicationCore.Services
             return await _movieRepository.GetByName(m => m.Title.Equals(movieTitle));
         }
 
-        public  IEnumerable<Movie> List(MovieListViewModel viewModel)
+        public  async Task<IEnumerable<Movie>> List(MovieListViewModel viewModel)
         {
-            return _movieRepository.List(viewModel);
+            return await _movieRepository.List(viewModel);
         }
     }
 }

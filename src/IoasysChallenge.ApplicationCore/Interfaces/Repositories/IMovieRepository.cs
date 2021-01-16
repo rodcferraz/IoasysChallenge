@@ -11,7 +11,7 @@ namespace IoasysChallenge.ApplicationCore.Interfaces.Repositories
     public interface IMovieRepository : IRepository<Movie>
     {
         Task<int> CountMovies();
-        IEnumerable<Movie> List(MovieListViewModel viewModel);
+        Task<IEnumerable<Movie>> List(MovieListViewModel viewModel);
         Task<Movie> GetById(int id);
     }
 }

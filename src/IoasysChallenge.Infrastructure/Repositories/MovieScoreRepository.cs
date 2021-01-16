@@ -42,7 +42,7 @@ namespace IoasysChallenge.Infrastructure.Repositories
 
         public async Task<IEnumerable<MovieScore>> List(MovieListViewModel viewModel)
         {
-            return await _repository.MovieScores.ToListAsync();
+            return await _repository.MovieScores.Include(m => m.Movie).Include(m => m.User).Where(m => m.MovieId == 2).ToListAsync();
         }
     }
 }
